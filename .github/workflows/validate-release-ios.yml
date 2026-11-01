@@ -1,0 +1,74 @@
+name: Validate release iOS requirement
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-ipa:
+    name: Validate IPA minimum iOS version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release IPA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts
+          gh release download "${{ github.event.release.tag_name }}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --pattern '*.ipa' \
+            --dir artifacts
+
+      - name: Check MinimumOSVersion
+        env:
+          REQUIRED_IOS: '26.6.1'
+        run: |
+          python3 - <<'PY'
+          import os
+          import plistlib
+          import sys
+          import zipfile
+          from pathlib import Path
+
+          def version(value):
+              try:
+                  return tuple(int(part) for part in str(value).split("."))
+              except ValueError:
+                  return ()
+
+          required = version(os.environ["REQUIRED_IOS"])
+          ipas = sorted(Path("artifacts").glob("*.ipa"))
+          if not ipas:
+              print("No IPA asset was found in the release.", file=sys.stderr)
+              sys.exit(1)
+
+          failed = False
+          for ipa in ipas:
+              with zipfile.ZipFile(ipa) as archive:
+                  plists = [
+                      name for name in archive.namelist()
+                      if name.startswith("Payload/") and name.endswith(".app/Info.plist")
+                  ]
+                  if len(plists) != 1:
+                      print(f"{ipa.name}: expected one app Info.plist, found {len(plists)}", file=sys.stderr)
+                      failed = True
+                      continue
+                  with archive.open(plists[0]) as plist_file:
+                      info = plistlib.load(plist_file)
+
+              minimum = info.get("MinimumOSVersion") or info.get("CFBundleMinimumOSVersion")
+              actual = version(minimum)
+              if not actual or actual < required:
+                  print(
+                      f"{ipa.name}: requires {minimum!r}; expected iOS {os.environ['REQUIRED_IOS']} or newer",
+                      file=sys.stderr,
+                  )
+                  failed = True
+              else:
+                  print(f"{ipa.name}: MinimumOSVersion={minimum} (OK)")
+
+          sys.exit(1 if failed else 0)
+          PY

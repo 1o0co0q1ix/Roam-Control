@@ -16,7 +16,7 @@ For detailed changes, see [CHANGELOG.md](../CHANGELOG.md).
 
 ## Before installing
 
-- Requires **iOS 27 or newer** and an iPhone with **Developer Mode** enabled.
+- Requires **iOS 26.6.1 or newer** and an iPhone with **Developer Mode** enabled.
 - **LocalDevVPN is still required** for local pairing connectivity.
 - Distributed as an **unsigned IPA**, to be signed through SideStore or a compatible installation method. Free Apple accounts remain subject to signing and refresh restrictions.
 - For LiveContainer installation, enable **Fix Local Notifications** before the app's first launch, as documented in the [installation guide](Installation.md).
