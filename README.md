@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <strong>Current release:</strong> 0.9.9 Build 105 · <strong>Requires:</strong> iOS 27+
+  <strong>Current release:</strong> 0.9.9 Build 105 · <strong>Requires:</strong> iOS 26.6.1+
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/iOS-27%2B-blue" alt="iOS 27+">
+  <img src="https://img.shields.io/badge/iOS-26.6.1%2B-blue" alt="iOS 26.6.1+">
   <img src="https://img.shields.io/badge/UI-SwiftUI-orange" alt="SwiftUI">
   <img src="https://img.shields.io/badge/Current-0.9.9-lightgrey" alt="Current release 0.9.9">
   <img src="https://img.shields.io/badge/License-Proprietary-lightgrey" alt="Proprietary">

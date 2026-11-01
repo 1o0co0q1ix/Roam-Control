@@ -42,7 +42,7 @@ Released 20 October 2026.
 
 ### Installation and migration
 
-- Requires iOS 27 or newer, Developer Mode and LocalDevVPN for pairing connectivity. Distributed as an unsigned IPA for signing through SideStore or a compatible installation method.
+- Requires iOS 26.6.1 or newer, Developer Mode and LocalDevVPN for pairing connectivity. Distributed as an unsigned IPA for signing through SideStore or a compatible installation method.
 - **Upgrading directly from 0.9.4 or earlier:** Back up favourites, history and supported preferences before moving to the newer `com.roamcontrol` app identifier. Data does not automatically transfer from the old app container; pairing records are not included in app backups and the device must be paired again.
 - See [Installation](Documentation/Installation.md), [Migration FAQ](Documentation/Migration095.md) and [Current Release](Documentation/CurrentRelease.md).
 

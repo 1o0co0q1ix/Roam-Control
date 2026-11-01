@@ -4,7 +4,7 @@ Roam Control is not distributed through the App Store or TestFlight. Public beta
 
 ## Requirements
 
-- An iPhone running iOS 27 or newer.
+- An iPhone running iOS 26.6.1 or newer.
 - Developer Mode enabled under **Settings → Privacy & Security**.
 - [LocalDevVPN](https://apps.apple.com/app/localdevvpn/id6755608044) installed on the iPhone.
 - SideStore for a standalone install, or LiveContainer for a contained install.
